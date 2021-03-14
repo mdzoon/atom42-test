@@ -1,0 +1,96 @@
+[
+    {
+        "id" : 1,
+        "name" : "Canary Wharf",
+        "plans" : [
+            {
+                "name" : "Day Pass",
+                "price" : 12
+            },
+            {
+                "name" : "Monthly Pass",
+                "price" : 27
+            },
+            {
+                "name" : "Quarterly Pass",
+                "price" : 75
+            },
+            {
+                "name" : "Annual Pass",
+                "price" : 240
+            }
+        ]
+    },
+    {
+        "id" : 2,
+        "name" : "Oxford Circus",
+        "plans" : [
+            {
+                "name" : "Monthly Pass",
+                "price" : 20
+            },
+            {
+                "name" : "Quarterly Pass",
+                "price" : 55
+            },
+            {
+                "name" : "Annual Pass",
+                "price" : 180
+            }
+        ]
+    },
+    {
+        "id" : 3,
+        "name" : "Camden Town",
+        "plans" : [
+            {
+                "name" : "Day Pass",
+                "price" : 10
+            },
+            {
+                "name" : "Monthly Pass",
+                "price" : 25
+            }
+        ]
+    },
+    {
+        "id" : 4,
+        "name" : "Wimbledon",
+        "plans" : [
+            {
+                "name" : "Day Pass",
+                "price" : 10
+            },
+            {
+                "name" : "Monthly Pass",
+                "price" : 25
+            },
+            {
+                "name" : "Quarterly Pass",
+                "price" : 60
+            },
+            {
+                "name" : "Annual Pass",
+                "price" : 200
+            }
+        ]
+    },
+    {
+        "id" : 5,
+        "name" : "Brent Cross",
+        "plans" : [
+            {
+                "name" : "Day Pass",
+                "price" : 12
+            },
+            {
+                "name" : "Monthly Pass",
+                "price" : 27
+            },
+            {
+                "name" : "Annual Pass",
+                "price" : 240
+            }
+        ]
+    }
+]
