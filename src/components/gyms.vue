@@ -18,12 +18,12 @@
 </template>
 
 <script>
-// import plans from "@/components/plans";
+import plans from "@/components/plans";
 
 export default {
   name: "gym",
   components: {
-    // plans
+    plans
   },
   props: { 
     gym: Object

@@ -2,9 +2,11 @@
   <div>
     <h3>Select your local gym:</h3>
 
-    <gyms class="mt-4" v-for="gym in gymData" :key="gym.id" :gym="gym" />
+    <div v-if="tab === 1">
+      <gyms class="mt-4" v-for="gym in gymData" :key="gym.id" :gym="gym" />
+    </div>
 
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+    <b-form @submit="onSubmit" @reset="onReset" v-if="tab === 2">
 
       <b-form-group id="first-name-group" label="Your First Name:" label-for="first-name">
         <b-form-input
@@ -80,8 +82,9 @@
 
     </b-form>
 
-    <div class="buttons-container">
-      <b-button variant="outline-dark" @click="next()">Next</b-button>  
+    <div class="mt-4 buttons-container">
+      <b-button variant="outline-dark" @click.prevent="previous()" v-show="!isFirst()">Previous</b-button>
+      <b-button variant="outline-dark" @click.prevent="next()">{{ nextButtonText() }}</b-button>
     </div>
 
     <b-card class="mt-3" header="Form Data Result">
@@ -101,6 +104,7 @@ export default {
     return {
       gymData,
       openedForm: false,
+      tab: 1,
       form: {
           firstName: '',
           lastName: '',
@@ -110,7 +114,7 @@ export default {
           age: '',
           checked: []
         },
-        show: false
+      show: false
     }
   },
   components: {
@@ -130,24 +134,28 @@ export default {
       this.form.phone = ''
       this.form.postcode = ''
       this.form.age = ''
-      this.form.food = null
       this.form.checked = []
       // Trick to reset/clear native browser form validation state
       this.show = false
       this.$nextTick(() => {
         this.show = true
       })
+    },
+		next() {
+			this.tab++
+		},
+		previous() {
+			this.tab--
+		},
+    isFirst() {
+      return this.tab === 1
+    },
+    nextButtonText() {
+      if ( this.tab === 1 ) {
+        return 'Next'
+      }
+      return 'Submit'
     }
-		// next() {
-		// 	if (this.index < this.questions.length - 1) {
-		// 		this.index++
-		// 	}
-		// },
-		// back() {
-		// 	if (this.index > 0) {
-		// 		this.index--
-		// 	}
-		// }
   }
 }
 </script>
