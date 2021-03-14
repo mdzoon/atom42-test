@@ -2,8 +2,7 @@
   <div>
     <b-form-radio
       v-model="selected"
-      :aria-describedby="ariaDescribedby"
-      name="some-radios"
+      :name="`${plan.name}-radios`"
       :value="`${plan.name}:${plan.price}`"
       @input="$emit('input', $event.target.value)"
     >
@@ -17,7 +16,8 @@
 export default {
   name: "plan",
   props: { 
-    plan: Object
+    plan: Object,
+    value: String
   }
 }
 </script>

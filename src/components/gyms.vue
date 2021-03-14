@@ -9,7 +9,7 @@
     <b-collapse :id="`collapse-${gym.id}`" v-model="visible" class="mt-2">
       <b-card>
         <h3>Select your plan:</h3>
-        <b-form-group label="Individual radios">
+        <b-form-group label="">
           <plans v-for="(plan, index) in gym.plans" :key="index" :plan="plan" />
         </b-form-group>
       </b-card>
