@@ -212,7 +212,8 @@ export default {
       },
       show: false,
       submitStatus: '',
-      formSubmitted: false
+      formSubmitted: false,
+      // action: '' TODO call to API
     }
   },
   components: {
@@ -227,13 +228,30 @@ export default {
         this.submitStatus = 'ERROR'
         this.formSubmitted = true
       } else {
-        // submit logic
         this.submitStatus = 'PENDING'
+
+        // TODO - basic XMLHttpRequest
+        // const form = this
+        // const xhr = new XMLHttpRequest();
+        // xhr.open('POST', this.form.action, false);
+        // // xhr.withCredentials = true;
+        // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        // xhr.onreadystatechange = function() {
+        //   form.submitStatus = 'PENDING'
+        //   if (xhr.readyState === 4 && xhr.status === 200) {
+        //     form.submitStatus = 'OK'
+        //     alert(JSON.stringify(form.form))
+        //     this.tab = 4;
+        //     this.onReset();
+        //   }
+        // }
+        // xhr.send();
+
         setTimeout(() => {
           this.submitStatus = 'OK'
           this.tab = 4;
-          alert(JSON.stringify(this.form))
         }, 500)
+
       }
     },
     onReset(event) {
