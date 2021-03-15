@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h3>Select your local gym:</h3>
 
     <b-form @submit="onSubmit" @reset="onReset">
 
       <div v-if="tab === 1">
+        <h3>Select your local gym:</h3>
         <gyms class="mt-4" v-for="gym in gymData" :key="gym.id" :gym="gym" @update-gym="updateGym"/>
       </div>
 
@@ -101,7 +101,7 @@
             placeholder="Enter Your Postcode"
           ></b-form-input>
           <p class="alert alert-danger mt-1" role="alert" v-if="formSubmitted && !$v.form.postcode.minLength">
-            The postcode must contain at least {{$v.form.postcode.$params.minLength.min}} letters.
+            The postcode must contain at least {{$v.form.postcode.$params.minLength.min}} letters and numbers.
           </p>
         </b-form-group>
 
@@ -157,25 +157,30 @@
       <div v-if="tab === 3">
 
         <div class="mt-3">
-          <p class="alert alert-success" role="alert" v-if="submitStatus === 'OK'">Thank you for your submission!</p>
           <p class="alert alert-danger" role="alert" v-if="submitStatus === 'ERROR'">Please fill in the form correctly.</p>
           <p class="alert alert-info" role="alert" v-if="submitStatus === 'PENDING'">Sending...</p>
         </div>
 
-        <b-card class="mt-3" header="Your details">
-          <pre class="m-0">{{ form }}</pre>
+        <b-card class="mt-3" header="Your details:">
+          <ul>
+            <summaryPage class="mt-1" v-for="(entry, name, index) in form" :key="index" :entry="entry" :name="name" />
+          </ul>
         </b-card>
 
-        <b-button type="submit" variant="primary">Confirm</b-button>
-        <b-button type="reset" variant="danger">Reset</b-button>
+        <div class="mt-4 buttons-container">
+          <b-button type="submit" variant="primary">Confirm</b-button>
+          <b-button type="reset" variant="danger">Reset</b-button>
+        </div>
       </div>
 
     </b-form>
 
-    <div class="mt-4 buttons-container">
+    <div class="mt-4 buttons-container" v-if="tab !== 4">
       <b-button variant="outline-dark" @click.prevent="previous()" v-show="!isFirst()">Previous</b-button>
       <b-button variant="outline-dark" @click.prevent="next()" v-show="!isLast()">Next</b-button>
     </div>
+
+    <h1 class="p-5 alert alert-success" role="alert" v-if="submitStatus === 'OK' && tab === 4">Thank you for your submission!</h1>
 
   </div>
 </template>
@@ -184,6 +189,7 @@
 import { required, minLength, email, numeric, minValue } from 'vuelidate/lib/validators'
 import gymData from "@/assets/data/gym.json";
 import gyms from "@/components/gyms";
+import summaryPage from "@/components/summaryPage";
 
 export default {
   name: 'membershipForm',
@@ -210,7 +216,8 @@ export default {
     }
   },
   components: {
-    gyms // The original id was 1 - apparent typo
+    gyms,
+    summaryPage
   },
 	methods: {
     onSubmit(event) {
@@ -224,6 +231,7 @@ export default {
         this.submitStatus = 'PENDING'
         setTimeout(() => {
           this.submitStatus = 'OK'
+          this.tab = 4;
           alert(JSON.stringify(this.form))
         }, 500)
       }
@@ -295,3 +303,17 @@ export default {
   }
 }
 </script>
+
+
+<style>
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button,
+.buttons-container button {
+  min-width: 10rem;
+}
+</style>
