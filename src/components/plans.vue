@@ -4,7 +4,6 @@
       v-model="selected"
       :name="`${plan.name}-radios`"
       :value="`${plan.name}:${plan.price}`"
-      @input="$emit('input', $event.target.value)"
     >
       {{ plan.name }} : £{{ plan.price }}
     </b-form-radio>
@@ -16,8 +15,18 @@
 export default {
   name: "plan",
   props: { 
-    plan: Object,
-    value: String
-  }
+    plan: Object
+  },
+  data () {
+    return {
+      selected: ''
+    }
+  },
+  watch: {
+    selected () {
+      this.$emit('update-plan', this.plan.name);
+    }
+  } 
+
 }
 </script>

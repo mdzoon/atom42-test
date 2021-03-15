@@ -10,7 +10,7 @@
       <b-card>
         <h3>Select your plan:</h3>
         <b-form-group label="">
-          <plans v-for="(plan, index) in gym.plans" :key="index" :plan="plan" />
+          <plans v-for="(plan, index) in gym.plans" :key="index" :plan="plan"  @update-plan="updatePlan"/>
         </b-form-group>
       </b-card>
     </b-collapse>
@@ -28,9 +28,14 @@ export default {
   props: { 
     gym: Object
   },
-  data() {
+  data () {
     return {
       visible: false
+    }
+  },
+  methods: {
+    updatePlan(plan) {
+      this.$emit( 'update-gym' , this.gym.name, plan)
     }
   }
 }

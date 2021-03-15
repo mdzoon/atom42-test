@@ -5,7 +5,7 @@
     <b-form @submit="onSubmit" @reset="onReset">
 
       <div v-if="tab === 1">
-        <gyms class="mt-4" v-for="gym in gymData" :key="gym.id" :gym="gym" />
+        <gyms class="mt-4" v-for="gym in gymData" :key="gym.id" :gym="gym" @update-gym="updateGym"/>
       </div>
 
       <div v-if="tab === 2">
@@ -118,6 +118,8 @@ export default {
           phone: '',
           postcode: '',
           age: '',
+          location: '',
+          plan: '',
           checked: []
         },
       show: false
@@ -141,6 +143,8 @@ export default {
       this.form.phone = ''
       this.form.postcode = ''
       this.form.age = ''
+      this.location = ''
+      this.planPlan = ''
       this.form.checked = []
       // Trick to reset/clear native browser form validation state
       this.show = false
@@ -159,6 +163,10 @@ export default {
     },
     isLast() {
       return this.tab === 3
+    },
+    updateGym(gymName, gymPlan) {
+      this.form.gymName = gymName;
+      this.form.plan = gymPlan;
     }
   }
 }
