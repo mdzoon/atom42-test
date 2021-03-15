@@ -243,6 +243,10 @@ export default {
         //     alert(JSON.stringify(form.form))
         //     this.tab = 4;
         //     this.onReset();
+        //     redirect to thank-you page
+        //   } else {
+        //      throw error
+        //      redirect to error page
         //   }
         // }
         // xhr.send();
